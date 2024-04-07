@@ -150,6 +150,7 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 | Name | Description | Type | Default | Required |
 | :--- | :--- | :---: | :---: | :---: |
 | **database_name** | (Required) Name of the database. The acceptable characters are lowercase letters, numbers, and the underscore character. | string | `null` | yes |
+| **catalog_id** | (Optional) The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default. | string | `account_id` | no |
 | **database_description** | (Optional) Description of the database. | string | `null` | no |
 | **database_catalog_id** | (Optional) ID of the Glue Catalog to create the database in. If omitted, this defaults to the AWS Account ID | string | `Account ID` | no |
 | **create_table_default_permission** | (Optional) Creates a set of default permissions on the table for principals. | map(any) | `null` | no |
@@ -158,6 +159,23 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 | **target_database** | (Optional) Configuration block for a target database for resource linking. | map(string) | `null` | no |
 | **federated_database** | (Optional) Configuration block that references an entity outside the AWS Glue Data Catalog | map(string) | `null` | no |
 | **glue_tags** | (Optional) Tagging values for all supported components | map(string) | `null` | no |
+| **enable_resource_policy** | (Optional) Whether to create Glue Resource Policy | bool | `false` | no |
+| **enable_catalog_encryption** | (Optional) Whether to enable Glue Data Catalog Encryption Settings | bool | `false` | no |
+| **enable_security_configuration** | (Optional) Whether to enable Glue Data Catalog Security Configuration | bool | `false` | no |
+| **encrypt_connection** | (Required when **enable_catalog_encryption** == true) <br>When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.| bool | `false` | no |
+| **enable_hybrid_policy** | (Optional, 'TRUE' or 'FALSE') Use both aws_glue_resource_policy and AWS Lake Formation resource policies to determine access permissions | string | `null` | no |
+| **resource_policy** | (Required when **enable_resource_policy** == true ) <br>The policy to be applied to the aws glue data catalog. | string | `null` | no |
+| **connection_encryption_key** | (Optional) A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog | string | `null` | no |
+| **encryption_at_rest_mode** | (Required when **enable_catalog_encryption** == true) <br>The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE. | string | `null` | no |
+| **encryption_at_rest_role** | (Optional) The ARN of the AWS IAM role used for accessing encrypted Data Catalog data. | string | `null` | no |
+| **encryption_at_rest_key** | (Optional) The ARN of the AWS KMS key to use for encryption at rest. | string | `null` | no |
+| **security_configuration_name** | (Required when **enable_security_configuration** == true) <br>Name of the security configuration. | string | `null` | no |
+| **cloudwatch_encryption_mode** | (Required when **enable_security_configuration** == true) <br>A block contains encryption configuration for CloudWatch. <br>Valid values are `DISABLED`, `SSE-KMS` | string | `null` | no |
+| **cloudwatch_encryption_key** | (Optional) ARN of the KMS key to be used to encrypt the data. (SSE-KMS mode) | string | `null` | no |
+| **bookmarks_encryption_mode** | (Required when **enable_security_configuration** == true) <br>A block contains encryption configuration for job bookmarks. <br>Valid values are DISABLED, CSE-KMS | string | `null` | no |
+| **bookmarks_encryption_key** | (Optional) ARN of the KMS key to be used to encrypt the data. (CSE-KMS mode) | string | `null` | no |
+| **s3_encryption_mode** | (Required when **enable_security_configuration** == true) <br>A block contains encryption configuration for S3. <br>Valid values are DISABLED, SSE-KMS, SSE-S3 | string | `null` | no |
+| **s3_encryption_key** | (Optional) ARN of the KMS key to be used to encrypt the data. (SSE-KMS and SSE-S3 mode) | string | `null` | no |
 | **create_connection** | (Optional) Whether to create AWS Glue Connection | bool | `false` | no |
 | **create_crawler** | (Optional) Whether to create AWS Glue Crawler | bool | `false` | no |
 | **create_custom_classifier** | (Optional) Whether to create AWS Glue Custom Classifier | bool | `false` | no |
@@ -179,6 +197,12 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 
 | Name | Description |
 | :--- | :--- |
+| **resource_policy** | AWS Glue Data Catalog Resource Policy. |
+| **resource_policy_coverage** | The AWS Region where the policy is applied. |
+| **catalog_id** | The ID of the Data Catalog the security configuration is being configured for. |
+| **catalog_encryption_settings** | The Encryption Settings of the Data Catalog. |
+| **security_configuration_name** | The Security Configuration Name of the Data Catalog. |
+| **security_configuration_encryption** | The Security Configuration Encryption configs of the Data Catalog. |
 | **db_id** | ID of the database. |
 | **db_name** | Name of the database. |
 | **db_arn** | ARN of the Glue Catalog Database. |

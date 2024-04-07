@@ -2,12 +2,12 @@
 # Glue Resource Policy Outputs 
 #############################
 output "resource_policy" {
-  description = "AWS Glue Data Catalog Resource Policy"
+  description = "AWS Glue Data Catalog Resource Policy."
   value       = try(jsondecode(aws_glue_resource_policy.this[0].policy), "")
 }
 
 output "resource_policy_coverage" {
-  description = "The AWS Region where the policy is applied"
+  description = "The AWS Region where the policy is applied."
   value       = try(aws_glue_resource_policy.this[0].id, "")
 }
 
@@ -16,12 +16,12 @@ output "resource_policy_coverage" {
 # Glue Catalog Encryption Outputs 
 #############################
 output "catalog_id" {
-  description = "The ID of the Data Catalog the security configuration is being configured for"
+  description = "The ID of the Data Catalog the security configuration is being configured for."
   value       = try(aws_glue_data_catalog_encryption_settings.this[0].catalog_id, "")
 }
 
 output "catalog_encryption_settings" {
-  description = "The Encryption Settings of the Data Catalog"
+  description = "The Encryption Settings of the Data Catalog."
   value       = try(aws_glue_data_catalog_encryption_settings.this[0].data_catalog_encryption_settings, "")
 }
 
@@ -30,12 +30,12 @@ output "catalog_encryption_settings" {
 # Glue Catalog Security Outputs 
 #############################
 output "security_configuration_name" {
-  description = "The Security Configuration Name of the Data Catalog"
+  description = "The Security Configuration Name of the Data Catalog."
   value       = try(aws_glue_security_configuration.this[0].name, "")
 }
 
 output "security_configuration_encryption" {
-  description = "The Security Configuration Encryption configs of the Data Catalog"
+  description = "The Security Configuration Encryption configs of the Data Catalog."
   value       = try(aws_glue_security_configuration.this[0].encryption_configuration, "")
 }
 

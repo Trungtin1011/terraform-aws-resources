@@ -3,7 +3,7 @@
 #############################
 variable "enable_resource_policy" {
   type        = bool
-  description = "Whether to create Glue Resource Policy"
+  description = "(Optional) Whether to create Glue Resource Policy"
   default     = false
 }
 
@@ -25,7 +25,7 @@ variable "resource_policy" {
 #############################
 variable "enable_catalog_encryption" {
   type        = bool
-  description = "Whether to enable Glue Data Catalog Encryption Settings"
+  description = "(Optional) Whether to enable Glue Data Catalog Encryption Settings"
   default     = false
 }
 
@@ -37,7 +37,7 @@ variable "catalog_id" {
 
 variable "encrypt_connection" {
   type        = bool
-  description = "(Required) When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption."
+  description = "(Required when **enable_catalog_encryption** == true) When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption."
   default     = false
 }
 
@@ -49,7 +49,7 @@ variable "connection_encryption_key" {
 
 variable "encryption_at_rest_mode" {
   type        = string
-  description = "(Required) The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE."
+  description = "(Required when **enable_catalog_encryption** == true) The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE."
   default     = "DISABLED"
 }
 
@@ -71,19 +71,19 @@ variable "encryption_at_rest_key" {
 #############################
 variable "enable_security_configuration" {
   type        = bool
-  description = "Whether to enable Glue Data Catalog Security Configuration"
+  description = "(Optional) Whether to enable Glue Data Catalog Security Configuration"
   default     = false
 }
 
 variable "security_configuration_name" {
   type        = string
-  description = "(Required) Name of the security configuration."
+  description = "(Required when **enable_security_configuration** == true) Name of the security configuration."
   default     = null
 }
 
 variable "cloudwatch_encryption_mode" {
   type        = string
-  description = "(Required) A block contains encryption configuration for CloudWatch. Valid values are DISABLED, SSE-KMS"
+  description = "(Required when **enable_security_configuration** == true) A block contains encryption configuration for CloudWatch. Valid values are DISABLED, SSE-KMS"
   default     = "DISABLED"
 }
 
@@ -95,7 +95,7 @@ variable "cloudwatch_encryption_key" {
 
 variable "bookmarks_encryption_mode" {
   type        = string
-  description = "(Required) A block contains encryption configuration for job bookmarks. Valid values are DISABLED, CSE-KMS"
+  description = "(Required when **enable_security_configuration** == true) A block contains encryption configuration for job bookmarks. Valid values are DISABLED, CSE-KMS"
   default     = "DISABLED"
 }
 
@@ -107,7 +107,7 @@ variable "bookmarks_encryption_key" {
 
 variable "s3_encryption_mode" {
   type        = string
-  description = "(Required) A block contains encryption configuration for S3. Valid values are DISABLED, SSE-KMS, SSE-S3"
+  description = "(Required when **enable_security_configuration** == true) A block contains encryption configuration for S3. Valid values are DISABLED, SSE-KMS, SSE-S3"
   default     = "DISABLED"
 }
 
