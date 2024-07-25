@@ -32,3 +32,5 @@ test.log
 terraform.rc
 .terraform.lock.hcl
 .DS_Store
+# OSx Files
+**/*.DS_Store*

@@ -1,35 +1,18 @@
-# custom-aws-glue 
+# terraform-aws-glue
 
-**Repo Owner**: [trungtin](https://github.com/Trungtin1011/custom-apigateway-v1)
-
-<a href="https://github.com/Trungtin1011/custom-aws-glue/releases/latest"><img src="https://img.shields.io/github/release/Trungtin1011/custom-aws-glue.svg?style=for-the-badge" alt="Latest Release"/></a>
-<a href="https://github.com/Trungtin1011/custom-aws-glue/commits"><img src="https://img.shields.io/github/last-commit/Trungtin1011/custom-aws-glue.svg?style=for-the-badge" alt="Last Updated"/></a>
-
-
-Terraform modules for provisioning and managing AWS [Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) resources. 
-
-The following Glue resources are supported:
-> [AWS Glue Data Catalog Database](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_database)<br>
-> [AWS Glue Data Catalog Table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_table)<br>
-> [AWS Glue Classifier](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_classifier)<br>
-> [AWS Glue Connection](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_connection)<br>
-> [AWS Glue Crawler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_crawler)<br>
-> [AWS Glue Data Catalog Encryption Settings](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_catalog_encryption_settings)<br>
-> [AWS Glue Job](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_job)<br>
-> [AWS Glue Partition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_partition)<br>
-> [AWS Glue Partition Index](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_partition_index)<br>
-> [AWS Glue Schema Registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_registry)<br>
-> [AWS Glue Data Catalog Resource Policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_resource_policy)<br>
-> [AWS Glue Schema](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_schema)<br>
-> [AWS Glue Data Catalog Security Configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_security_configuration)<br>
-> [AWS Glue Trigger](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_trigger)<br>
-> [AWS Glue Workflow](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_workflow)
+**Repo Owner**: trungtin
 
 <br>
 
-## Usage
+## Module structure and Usage
 
-AWS Glue Data Catalog is a persistent metadata store in AWS Glue. 
+Terraform modules for provisioning and managing AWS [Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) resources.
+
+<br>
+
+### Module Capabilities
+
+AWS Glue Data Catalog is a persistent metadata store in AWS Glue.
 
 It contains definitions and information to create and monitor ETL jobs.
 
@@ -74,9 +57,28 @@ If `encryption_at_rest_mode` == `SSE-KMS-WITH-SERVICE-ROLE`
 
 <br>
 
+### Supported resources
+
+The following Glue resources are supported:
+1. [AWS Glue Data Catalog Database](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_database)<br>
+2. [AWS Glue Data Catalog Table](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_table)<br>
+3. [AWS Glue Classifier](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_classifier)<br>
+4. [AWS Glue Connection](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_connection)<br>
+5. [AWS Glue Crawler](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_crawler)<br>
+6. [AWS Glue Data Catalog Encryption Settings](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_catalog_encryption_settings)<br>
+7. [AWS Glue Job](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_job)<br>
+8. [AWS Glue Partition](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_partition)<br>
+9. [AWS Glue Partition Index](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_partition_index)<br>
+10. [AWS Glue Schema Registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_registry)<br>
+11. [AWS Glue Data Catalog Resource Policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_resource_policy)<br>
+12. [AWS Glue Schema](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_schema)<br>
+13. [AWS Glue Data Catalog Security Configuration](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_security_configuration)<br>
+14. [AWS Glue Trigger](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_trigger)<br>
+15. [AWS Glue Workflow](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_workflow)
+
 <br>
 
-## Basic Examples
+### Basic Examples
 
 ```hcl
 module "aws_glue" {
@@ -134,18 +136,21 @@ Plan: 2 to add, 0 to change, 0 to destroy.
 ```
 
 Check for complete example at: [complete example](./examples/complete/main.tf)
+
 <br>
 
-## Providers
+## Terraform settings
+
+### Required providers
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.37.0 |
+| <a name="requirement_terraform"></a> [terraform](#required-providers\_terraform) | >= 1.0
+| <a name="provider_aws"></a> [aws](#required-providers\_aws) | >= 5.37.0 |
 
 <br>
 
-## Input Variables
+### Available Inputs
 
 | Name | Description | Type | Default | Required |
 | :--- | :--- | :---: | :---: | :---: |
@@ -193,7 +198,7 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 
 <br>
 
-## Output Variables
+### Available Outputs
 
 | Name | Description |
 | :--- | :--- |
@@ -233,7 +238,9 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 
 <br>
 
-## References
+## Additional Information
+
+### Reference documentations
 
 1. [Glue Getting Started Guide](https://docs.aws.amazon.com/glue/latest/dg/getting-started.html) - Guide for getting oriented with glue and spark
 2. [AWS Glue programming guide](https://docs.aws.amazon.com/glue/latest/dg/edit-script.html) - Documentation about the process of programming with AWS Glue
@@ -243,14 +250,13 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 
 <br>
 
-### Under development
-> [AWS Glue Data Quality Ruleset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_quality_ruleset)<br>
-> [AWS Glue Dev Endpoint](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_dev_endpoint) - [(Has been removed from the Console since March 31, 2023)](https://docs.aws.amazon.com/glue/latest/dg/development.html#:~:text=The%20console%20experience%20for%20dev%20endpoints%20has%20been%20removed%20as%20of%20March%2031%2C%202023)<br>
-> [AWS Glue ML Transform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_ml_transform)<br>
-> [AWS Glue User Defined Function](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_user_defined_function)<br>
-
+### Resources under development
+1. [AWS Glue Data Quality Ruleset](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_quality_ruleset)<br>
+2. [AWS Glue Dev Endpoint](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_dev_endpoint) - [(Has been removed from the Console since March 31, 2023)](https://docs.aws.amazon.com/glue/latest/dg/development.html#:~:text=The%20console%20experience%20for%20dev%20endpoints%20has%20been%20removed%20as%20of%20March%2031%2C%202023)<br>
+3. [AWS Glue ML Transform](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_ml_transform)<br>
+4. [AWS Glue User Defined Function](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_user_defined_function)<br>
 
 <br>
 
-## License
+### License
 Private module
