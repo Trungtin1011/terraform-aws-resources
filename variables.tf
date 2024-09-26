@@ -1,13 +1,7 @@
 #############################
-# Glue Resource Policy Variables 
+# Glue Resource Policy Variables
 #############################
-variable "enable_resource_policy" {
-  type        = bool
-  description = "(Optional) Whether to create Glue Resource Policy"
-  default     = false
-}
-
-variable "enable_hybrid_policy" {
+variable "enable_hybrid_resource_policy" {
   type        = string
   description = "(Optional, 'TRUE' or 'FALSE') Use both aws_glue_resource_policy and AWS Lake Formation resource policies to determine access permissions"
   default     = null
@@ -21,7 +15,7 @@ variable "resource_policy" {
 
 
 #############################
-# Glue Catalog Encryption Variables 
+# Glue Catalog Encryption Variables
 #############################
 variable "enable_catalog_encryption" {
   type        = bool
@@ -67,7 +61,7 @@ variable "encryption_at_rest_key" {
 
 
 #############################
-# Glue Catalog Security Variables 
+# Glue Catalog Security Variables
 #############################
 variable "enable_security_configuration" {
   type        = bool
@@ -119,7 +113,7 @@ variable "s3_encryption_key" {
 
 
 #############################
-# Catalog Database & Registry Variables 
+# Catalog Database & Registry Variables
 #############################
 variable "database_name" {
   type        = string
@@ -164,7 +158,7 @@ variable "target_database" {
 }
 
 #############################
-# Glue Connection Variables 
+# Glue Connection Variables
 #############################
 variable "create_connection" {
   type        = bool
@@ -180,7 +174,7 @@ variable "connections" {
 
 
 #############################
-# Glue Crawler Variables 
+# Glue Crawler Variables
 #############################
 variable "create_crawler" {
   type        = bool
@@ -195,7 +189,7 @@ variable "crawlers" {
 }
 
 #############################
-# Glue Classifier Variables 
+# Glue Classifier Variables
 #############################
 variable "create_custom_classifier" {
   type        = bool
@@ -211,7 +205,7 @@ variable "custom_classifiers" {
 
 
 #############################
-# Glue Workflow Variables 
+# Glue Workflow Variables
 #############################
 variable "create_workflow" {
   type        = bool
@@ -227,7 +221,7 @@ variable "workflows" {
 
 
 #############################
-# Glue Trigger Variables 
+# Glue Trigger Variables
 #############################
 variable "create_trigger" {
   type        = bool
@@ -243,7 +237,7 @@ variable "triggers" {
 
 
 #############################
-# Glue Schema Variables 
+# Glue Schema Variables
 #############################
 variable "create_schema" {
   type        = bool
@@ -259,7 +253,7 @@ variable "schemas" {
 
 
 #############################
-# Glue Job Variables 
+# Glue Job Variables
 #############################
 variable "create_job" {
   type        = bool

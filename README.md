@@ -4,29 +4,23 @@
 
 <br>
 
-## Module structure and Usage
+## Module Capabilities
 
 Terraform modules for provisioning and managing AWS [Glue](https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html) resources.
 
-<br>
+### Module design objectives
 
-### Module Capabilities
+[AWS Glue Data Catalog](https://docs.aws.amazon.com/prescriptive-guidance/latest/serverless-etl-aws-glue/aws-glue-data-catalog.html) is a persistent metadata store in AWS Glue. It contains definitions and information to create and monitor ETL jobs.
 
-AWS Glue Data Catalog is a persistent metadata store in AWS Glue.
+Because [each AWS account has 1 Data Catalog per Region](https://docs.aws.amazon.com/lake-formation/latest/dg/populating-catalog.html#:~:text=Each%20AWS%20account%20has%20one%20Data%20Catalog%20per%20AWS%20Region.), this module by default set the account ID as the Glue Data Catalog ID.
 
-It contains definitions and information to create and monitor ETL jobs.
+The original purpose of this module is to group all components that share the same **Data Catalog Database** into one place for better management (create - delete - modify). The only required parameter in this module is `database_name`.
 
-Each account has 1 Data Catalog per Region, so basically we don't need to specify the `catalog_id` variable as it will be the `accountID`
-
-The original purpose of this module is to group all components that share the same **Data Catalog Database** into one place for better management (create - delete - modify)
-
-The only required parameter in this module is **database_name**
-
-If only **database_name** is provided, the module create **AWS Glue Schema Registry** resource along with the **Data Catalog Database** because these 2 resources share the same purpose as the central repository for other components
+The module also creates [AWS Glue Schema Registry](https://docs.aws.amazon.com/glue/latest/dg/schema-registry.html) resource along with the **Data Catalog Database** because these 2 resources share the same purpose as the central repository for other components
 
 At the time the module is written, it required Terraform AWS provider version to be at least **v5.37.0** for all the configuration options to be fully functional.
 
-### Notes about Glue Catalog Encryption Input Logic
+### Glue Catalog Encryption Input Logic
 
 **Connection Encryption** <br>
 
@@ -57,7 +51,7 @@ If `encryption_at_rest_mode` == `SSE-KMS-WITH-SERVICE-ROLE`
 
 <br>
 
-### Supported resources
+### Resources covered by the module
 
 The following Glue resources are supported:
 1. [AWS Glue Data Catalog Database](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_catalog_database)<br>
@@ -82,7 +76,7 @@ The following Glue resources are supported:
 
 ```hcl
 module "aws_glue" {
-  source               = "../custom-aws-glue?ref=v1.0.0"
+  source               = "../terraform-aws-glue?ref=v1.0.0"
   database_name        = "test_glue_database"
   database_description = "Glue Terraform module"
   glue_tags            = { owner = "trungtin" }
@@ -164,11 +158,10 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 | **target_database** | (Optional) Configuration block for a target database for resource linking. | map(string) | `null` | no |
 | **federated_database** | (Optional) Configuration block that references an entity outside the AWS Glue Data Catalog | map(string) | `null` | no |
 | **glue_tags** | (Optional) Tagging values for all supported components | map(string) | `null` | no |
-| **enable_resource_policy** | (Optional) Whether to create Glue Resource Policy | bool | `false` | no |
 | **enable_catalog_encryption** | (Optional) Whether to enable Glue Data Catalog Encryption Settings | bool | `false` | no |
 | **enable_security_configuration** | (Optional) Whether to enable Glue Data Catalog Security Configuration | bool | `false` | no |
 | **encrypt_connection** | (Required when **enable_catalog_encryption** == true) <br>When set to true, passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently of the catalog encryption.| bool | `false` | no |
-| **enable_hybrid_policy** | (Optional, 'TRUE' or 'FALSE') Use both aws_glue_resource_policy and AWS Lake Formation resource policies to determine access permissions | string | `null` | no |
+| **enable_hybrid_resource_policy** | (Optional, 'TRUE' or 'FALSE') Use both aws_glue_resource_policy and AWS Lake Formation resource policies to determine access permissions | string | `null` | no |
 | **resource_policy** | (Required when **enable_resource_policy** == true ) <br>The policy to be applied to the aws glue data catalog. | string | `null` | no |
 | **connection_encryption_key** | (Optional) A KMS key ARN that is used to encrypt the connection password. If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog | string | `null` | no |
 | **encryption_at_rest_mode** | (Required when **enable_catalog_encryption** == true) <br>The encryption-at-rest mode for encrypting Data Catalog data. Valid values are DISABLED, SSE-KMS, SSE-KMS-WITH-SERVICE-ROLE. | string | `null` | no |
@@ -257,6 +250,3 @@ Check for complete example at: [complete example](./examples/complete/main.tf)
 4. [AWS Glue User Defined Function](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_user_defined_function)<br>
 
 <br>
-
-### License
-Private module
