@@ -1,9 +1,9 @@
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_resource_policy
 resource "aws_glue_resource_policy" "this" {
-  count = var.enable_resource_policy != false ? 1 : 0
+  count = var.resource_policy != null ? 1 : 0
 
-  enable_hybrid = try(var.enable_hybrid_policy, null)
   policy        = var.resource_policy
+  enable_hybrid = try(var.enable_hybrid_resource_policy, null)
 }
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/glue_data_catalog_encryption_settings

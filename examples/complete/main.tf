@@ -1,10 +1,9 @@
 module "glue" {
-  source               = "../custom-aws-glue?ref=v1.0.0"
+  source               = "../terraform-aws-glue?ref=v1.0.0"
   database_name        = "test_glue_database"
   database_description = "Glue Terraform module"
   glue_tags            = { owner = "trungtin" }
 
-  enable_resource_policy        = false
   enable_catalog_encryption     = false
   enable_security_configuration = false
   create_connection             = false
@@ -32,19 +31,19 @@ module "glue" {
 
   ### Data Catalog Encryption
   encrypt_connection        = true
-  connection_encryption_key = "${module.kms.key_arn}"
-  encryption_at_rest_mode = "SSE-KMS-WITH-SERVICE-ROLE"
-  encryption_at_rest_key  = "${module.kms.key_arn}"
-  encryption_at_rest_role = "${aws_iam_role.kms_role.arn}"
+  connection_encryption_key = module.kms.key_arn
+  encryption_at_rest_mode   = "SSE-KMS-WITH-SERVICE-ROLE"
+  encryption_at_rest_key    = module.kms.key_arn
+  encryption_at_rest_role   = aws_iam_role.kms_role.arn
 
   ### Data Catalog Security Configuration
-  security_configuration_name   = "test_security_config"
-  cloudwatch_encryption_mode    = "SSE-KMS"
-  cloudwatch_encryption_key     = "${module.kms.key_arn}"
-  bookmarks_encryption_mode     = "CSE-KMS"
-  bookmarks_encryption_key      = "${module.kms.key_arn}"
-  s3_encryption_mode            = "SSE-KMS"
-  s3_encryption_key             = "${module.kms.key_arn}"
+  security_configuration_name = "test_security_config"
+  cloudwatch_encryption_mode  = "SSE-KMS"
+  cloudwatch_encryption_key   = module.kms.key_arn
+  bookmarks_encryption_mode   = "CSE-KMS"
+  bookmarks_encryption_key    = module.kms.key_arn
+  s3_encryption_mode          = "SSE-KMS"
+  s3_encryption_key           = module.kms.key_arn
 
   custom_classifiers = [
     {
